@@ -1,0 +1,128 @@
+{#
+ # Homepage template
+ # ---------------
+ #
+ # When this template gets loaded, it will be because someone has accessed
+ # http://yoursite.com/ (without any URI). Craft checks to see if you have
+ # a Single section set to be the Homepage (as you do, by default), and
+ # loads the section’s Template (this file). A special ‘entry’ variable
+ # will already be set for you, assigned to the Homepage entry.
+ #
+ # It's worth noting that even if you didn't have a Homepage Single section,
+ # as long as this template remains at craft/templates/index.html, it
+ # would still be the one to get loaded when accessing http://yoursite.com/,
+ # albeit without an ‘entry’ variable already set for you.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+
+{% block content %}
+
+<script type="text/javascript">
+  var current = 0;
+  $(document).ready(function(){
+    $('#'+current).show();
+  });
+
+  function previous(){
+    $('#'+current).hide();
+    if (current === 0){
+      current = 3;
+    } else {
+      current -= 1
+    }
+    $('#'+current).show();
+  };
+
+  function next(){
+    $('#'+current).hide();
+    if (current === 3){
+      current = 0;
+    } else {
+      current += 1
+    }
+    $('#'+current).show();
+  };
+
+
+
+</script>
+<title>{{title}}</title>
+                  <!-- Homepage Header -->
+                  {% for entry in craft.entries.section('home').section('home').slug('home-header') %}
+                  {% set image = entry.image.first() %}
+
+                  <div class="hero full" data-parallax="scroll" data-image-src="{{image.url}}" >
+                    <div class="wrapper middle pad">
+                      <h1>
+                      {{entry.title}}
+                      </h1>
+                      <div style="width:100%;max-width:350px;">
+                      {{entry.body}}
+                    </div>
+                      <a class="button" href="#">Get your data score</a>
+                    </div>
+
+                  </div>
+                </div>
+                  {% endfor %}
+
+
+
+
+
+
+                  <!--Homepage scores  -->
+                  <div class="slider full slides center">
+
+                    {% set i = 0 %}
+                    {% set currentShown = 0%}
+                    {% set current = 0 %}
+                    {% for entry in craft.entries.section('home').find() %}
+                    {% set image = entry.image.first() %}
+                    {% set tags = entry.tags.first() %}
+                      {% if image and tags == "homeQuestions" %}
+
+
+                      <div class="slide darkgray-txt center score-pane" style="display:none;" id="{{i}}" >
+
+                        <a class="datascore middle lightgray-bg" >
+                          <img class="full" src="{{image.url}}">
+                        </a>
+                        <h3>{{entry.title}}</h3>
+                        <p>{{entry.body}}</p>
+                        <p>
+                          <a href="#">Learn more</a>
+                        </p>
+
+                      </div>
+
+                      {% set i = i + 1%}
+                      {% endif %}
+                    {% endfor %}
+                    <button onclick="previous()">Previous</button>
+                    <button onclick="next()">Next</button>
+                </div>
+
+
+                <!--Homepage video  -->
+                  {% for entry in craft.entries.section('home').find() %}
+                  {% set video = entry.video.first() %}
+                    {% if video %}
+                    <div class="intro full">
+                      <div class="wrapper middle pad">
+                        <h3 class="center">{{entry.title}}</h3>
+                        <video class="middle" width="500" height="281" frameborder="0" controls>
+                          <source src="{{video.url}}" type="video/mp4">
+                          Your browser does not support HTML5 video. Please download a modern browser, like <a href="https://www.google.com/chrome/browser/desktop/">Google Chrome</a>.
+                        </video>
+                      </div>
+                    </div>
+                    {% endif %}
+                  {% endfor %}
+
+
+{% endblock %}

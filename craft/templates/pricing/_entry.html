@@ -1,0 +1,31 @@
+{#
+ # Pricing entry template
+ # -------------------
+ #
+ # This template gets loaded whenever aPricing entry’s URL is
+ # requested. That’s because the Pricing section’s Template setting is
+ # set to “pricing/_entry”, the path to this template.
+ #
+ # When this template is loaded, it will already have an ‘entry’
+ # variable, set to the requestedPricing entry.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+
+{% block content %}
+	<article>
+		<h1>{{ entry.title }}</h1>
+		<p>Posted on {{ entry.postDate.format('F d, Y') }}</p>
+    {% set video = entry.video.first() %}
+
+    {% if video %}
+    <video class="middle" width="500" height="281" frameborder="0" controls>
+      <source src="{{video.url}}" type="video/mp4">
+      Your browser does not support HTML5 video. Please download a modern browser, like <a href="https://www.google.com/chrome/browser/desktop/">Google Chrome</a>.
+    </video>
+    {% endif %}
+	</article>
+{% endblock %}

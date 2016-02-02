@@ -1,0 +1,115 @@
+{#
+ # Layout template
+ # ---------------
+ #
+ # This template defines your site’s global layout. It can be
+ # “extended” by other templates to fill in the gaps.
+ #
+ # See Twig’s Template Inheritance documentation for more details:
+ # http://twig.sensiolabs.org/doc/templates.html#template-inheritance
+ #}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+	<meta charset="utf-8" />
+	<title>{% if title is defined %}{{ title }} - {% endif %}{{ siteName }}</title>
+	<link rel="home" href="{{ siteUrl }}" />
+
+	<style type="text/css">
+		body {
+          background: url("../public/assets/texture_tile-bg.png") #222;
+          background-attachment: fixed;
+          color: #222;
+          margin: 0;
+          font-family: "Quicksand", sans-serif;
+          width: auto;}
+		#container { margin: 0 auto; width: auto; bottom: 0;
+			-webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+			        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+		}
+
+
+		#header { display: block; position: fixed; color: #fff; background: #586473; width: 100%; }
+    #footer { display: block; color: #fff; background: #222; width: auto;}
+		#header a, #footer a { color: #fff; }
+		#header {height: 80px; }
+		#header:after { content: '.'; display: block; height: 0; clear: both; visibility: hidden; }
+		#header a { text-decoration: none; }
+		#header h1 { float: left; margin: 0; font-weight: normal; font-size: 30px; line-height: 1; }
+		#header nav { display: block; float: right; margin-right: 200px;}
+		#header nav ul { margin: 0; list-style-type: none; }
+		#header nav ul li { float: left; margin-left: 20px;
+                          color: #fff;
+                          height: 40px;
+                          padding: 20px;
+                          font-size: 20px;
+                          font-weight: 400;
+                          text-transform: uppercase;
+                          text-decoration: none;
+                          display: block;}
+		#header nav ul li a { display: block; margin-top: 4px; line-height: 22px; }
+		#header nav ul li a:hover,
+		#header nav ul li a.active { border-bottom: 2px solid #fff; }
+		#header nav ul li a.active { cursor: default; }
+
+		#content { display: block; padding: 25px; background: #fff; }
+		#content h1 { margin-top: 0; font-size: 35px; font-weight: bold; }
+		#content a { color: #da5a47; text-decoration: none; }
+		#content a:hover { text-decoration: underline; }
+
+		#footer { border-radius: 0 0 7px 7px; padding: 15px; bottom: 0px; font-size: 12px; text-align: center; }
+    #footer-content {background-color:rgba(255,0,0,0); color: #fff;}
+    #logo {
+    	float: left;
+
+      width: 240px;
+    	height: 80px;
+      background: url("../public/assets/paradata-logo.png") 20px 24px no-repeat;
+      background-size: 200px 40px;
+    }
+    #logo:hover {
+    	background: url("../public/assets/paradata-logo-alt.png") 20px 24px no-repeat;
+    	background-size: 200px 40px;
+    }
+    #logo a {
+      display: block;
+      height: 100%;
+    }
+	</style>
+</head>
+
+<body>
+	<div id="container">
+		<header id="header">
+      <!-- Make this the paradata logo/  WITH the hover change logo color  -->
+
+      <div id="logo"> <a href="{{ url('')}}"></a></div>
+
+
+			<nav>
+				<ul>
+					<li><a href="{{ url('news') }}" {% if craft.request.firstSegment == 'news' %}class="active"{% endif %}>News</a></li>
+          <li><a href="{{ url('pricing') }}" {% if craft.request.firstSegment == 'pricing' %}class="active"{% endif %}>Pricing</a></li>
+          <li><a href="{{ url('solutions') }}" {% if craft.request.firstSegment == 'solutions' %}class="active"{% endif %}>Solutions</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="content" role="main">
+			{% block content %}
+				<p>If you see me, you haven’t set your <code>{% verbatim %}{% block content %}…{% endblock %}{% endverbatim %}</code> yet.</p>
+				<p>See Twig’s <a href="http://twig.sensiolabs.org/doc/templates.html#template-inheritance">Template Inheritance</a> documentation for an explanation.</p>
+			{% endblock %}
+		</main>
+
+    <div id="footer-content">
+      Dogpile
+    </div>
+
+		<footer id="footer">
+			© {{ now.year }} {{ companyName | ucfirst }}. All rights reserved.
+		</footer>
+	</div>
+</body>
+</html>

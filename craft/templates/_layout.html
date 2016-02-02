@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html ng-app="paraData">
+	<head>
+		<!-- Styles -->
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Quicksand:400,300,700">
+		<link type="text/css" rel="stylesheet" href="../public/assets/css/responsive.css">
+		<link type="text/css" rel="stylesheet" href="../public/assets/css/styles.css">
+		<link rel="stylesheet" type="text/css" href="../public/assets/css/paradata.css">
+
+		<link rel="stylesheet" type="text/css" href="../public/assets/js/slick-1.5.9/slick/slick.css"/>
+		<link rel="stylesheet" type="text/css" href="../public/assets/js/slick-1.5.9/slick/slick-theme.css"/>
+		<!-- External Script Libraries -->
+		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.js'></script>
+		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular-route.js'></script>
+		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular-resource.js'></script>
+		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular-animate.js'></script>
+		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular-touch.js'></script>
+		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
+		<!-- Base Scripts -->
+		<script type='text/javascript' src='../public/app/app.js'></script>
+		<script type='text/javascript' src='../public/app/routes.js'></script>
+		<script type='text/javascript' src='../public/assets/js/parallax/parallax.min.js'></script>
+		<!-- Core Module Scripts -->
+		<script type='text/javascript' src='../public/assets/js/client.js'></script>
+		<script type='text/javascript' src='../public/assets/js/client-ctrl.js'></script>
+		<script type='text/javascript' src='../public/assets/js/sitemap.js'></script>
+		<script type='text/javascript' src='../public/assets/js/sitemap-ctrl.js'></script>
+		<script type='text/javascript' src='../public/app/modules/contact/contact-drv.js'></script>
+		<script type='text/javascript' src='../public/app/modules/copyright/copyright-drv.js'></script>
+		<script type='text/javascript' src='../public/app/modules/footer/footer-drv.js'></script>
+		<script type='text/javascript' src='../public/app/modules/header/header-drv.js'></script>
+		<script type='text/javascript' src='../public/app/modules/nav/nav-drv.js'></script>
+		<script type='text/javascript' src='../public/app/modules/social/social-drv.js'></script>
+		<!-- Slick Module -->
+		<script type='text/javascript' src="../public/assets/js/slick-1.5.9/slick/slick.min.js"></script>
+		<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script> -->
+		<script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+		<!-- Additional Module Scripts -->
+		<!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
+		<!-- <script type='text/javascript' src="../public/assets/js/slides/jquery.slides.min.js"></script>
+		<script type='text/javascript' src='../public/app/modules/slides/slides.js'></script>
+		<script type='text/javascript' src='../public/app/modules/slides/slides-srv.js'></script>
+		<script type='text/javascript' src='../public/app/modules/slides/slides-ctrl.js'></script>
+		<script type='text/javascript' src='../public/app/modules/slides/slides-drv.js'></script> -->
+	</head>
+<!--
+	<body>
+		<appheader class='full'></appheader>
+		<div id="content" class='main full' ng-view></div>
+		<appfooter class='full'></appfooter>
+	</body>
+-->
+	<body>
+
+		<!-- This is the header bar.  It includes the logo, and all pages to visit -->
+		<header class="full" style="position:fixed;">
+			<nav class="wrapper middle">
+				<div class="logo">
+					<a href="{{ url('')}}"></a>
+				</div>
+				<ul>
+					<li ng-repeat="navitem in sitemap.header.navitems">
+						<a href="{{ url('solutions') }}">Solutions</a>
+					</li>
+					<li ng-repeat="navitem in sitemap.header.navitems">
+						<a href="{{ url('markets') }}">Markets</a>
+					</li>
+					<li ng-repeat="navitem in sitemap.header.navitems">
+						<a href="{{ url('Technology') }}">Technology</a>
+					</li>
+					<li ng-repeat="navitem in sitemap.header.navitems">
+						<a href="{{ url('news') }}">News</a>
+					</li>
+					<li class="nav-cta">
+						<a href="#">Sign up</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+
+		<div class="full  home">
+      <main id="content" role="main">
+
+        {% block content %}
+          <p>If you see me, you haven’t set your <code>{% verbatim %}{% block content %}…{% endblock %}{% endverbatim %}</code> yet.</p>
+          <p>See Twig’s <a href="http://twig.sensiolabs.org/doc/templates.html#template-inheritance">Template Inheritance</a> documentation for an explanation.</p>
+        {% endblock %}
+      </main>
+		</div>
+
+
+
+
+<!-- This is the footer, has address, phone, social media, appears on all pages -->
+		<footer class="full">
+			<div class="wrapper middle">
+				<div class="half pad">
+					<nav>
+						<p>
+							<a href="{{ url('company') }}" ng-repeat="navitem in sitemap.footer.navitems">Company</a><br>
+							<a href="{{ url('careers') }}">Careers</a><br>
+							<a href="{{ url('blog') }}">Blog</a><br>
+						</p>
+					</nav>
+					<div class="social">
+						<p>Follow Us:</p>
+						<ul>
+							<li ng-repeat="social in socials">
+								<a href="{{companyInfo.facebookaccount}}" target="_blank">
+									<img src="../public/assets/images/icons/social_icon_facebook.png" alt="">
+								</a>
+							</li>
+							<li ng-repeat="social in socials">
+								<a href="{{companyInfo.twitteraccount}}" target="_blank">
+									<img src="../public/assets/images/icons/social_icon_twitter.png" alt="">
+								</a>
+							</li>
+							<li ng-repeat="social in socials">
+								<a href="{{companyInfo.linkedinaccount}}" target="_blank">
+									<img src="../public/assets/images/icons/social_icon_linkedin.png" alt="">
+								</a>
+							</li>
+							<li ng-repeat="social in socials">
+								<a href="{{companyInfo.googleplusaccount}}" target="_blank">
+									<img src="../public/assets/images/icons/social_icon_google_plus.png" alt="">
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="contact half pad">
+					<p>{{ companyInfo.companyname | ucfirst }}</p>
+					<p>
+						<a href="https://goo.gl/maps/4d6BKC2FUJE2" target="_blank">
+							{{companyInfo.addressLine1}}<br>
+							{{companyInfo.addressline2}}
+						</a>
+					</p>
+					<p>
+						<a href="tel:{{companyInfo.phonenumber}}">{{companyInfo.phonenumber}}</a><br>
+						<a href="mailto:{{companyInfo.email}}">{{companyInfo.email}}</a>
+					</p>
+				</div>
+			</div>
+			<div class="darkgray-bg center full">
+				<h6>© {{ now.year }} {{ companyInfo.companyname | ucfirst }}. All rights reserved.</h6>
+			</div>
+		</footer>
+	</body>
+</html>

@@ -1,0 +1,49 @@
+{#
+ # Pricing index template
+ # -------------------
+ #
+ # This template is loaded whenever http://example.com/pricing is
+ # requested, because it is located at pricing/index.html in your
+ # craft/templates/ folder.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+{% set title = "Pricing" %}
+
+{% block content %}
+
+<div class="hero full" data-parallax="scroll" data-image-src="../public/assets/images/backgrounds/background-homepage-1.jpg">
+  <div class="wrapper middle pad">
+    <h1>
+      {{title}}
+    </h1>
+    <p style="width:100%;max-width:350px;">
+      Lorem ipsum dolor sit amet, usu tation audiam animal eu, mei dolorum pericula eu. Ut mollis detracto menandri has, libris docendi atomorum duo an.
+    </p>
+    <a class="button" href="#">Get your data score</a>
+  </div>
+</div>
+
+
+<div class="intro full">
+  <div class="wrapper middle pad">
+
+
+
+
+	<h1>Pricingggg</h1>
+
+	{% for entry in craft.entries.section('pricing').find() %}
+		<article>
+			<h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
+      {% set video = entry.video.first() %}
+        <p>{{entry.body}}</p>
+	{% endfor %}
+
+
+</div>
+</div>
+{% endblock %}
